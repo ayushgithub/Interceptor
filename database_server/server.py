@@ -26,9 +26,9 @@ class myHandler(BaseHTTPRequestHandler):
 
 def run():
     try:
-        server_address = ('', 8000)
+        server_address = ('', 9000)
         httpd = HTTPServer(server_address, myHandler)
-        print('Started httpserver on port ', 8000)
+        print('Started httpserver on port ', 9000)
         httpd.serve_forever()
     except KeyboardInterrupt:
         print('^C received, shutting down the web server')
