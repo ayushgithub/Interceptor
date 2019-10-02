@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Code is inspired from https://gist.github.com/nitaku/10d0662536f37a087e1b
 
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
