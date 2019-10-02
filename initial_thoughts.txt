@@ -1,0 +1,47 @@
+﻿The problem as given by Sudhir
+
+
+Implement an interceptor that will monitor the communication between two services, pods and in general containers
+
+
+--------------------------
+Initial thoughts
+
+
+- I will be thinking in terms of Kubernetes pods since it is used by many and is open source. The solution then can be easily ported to others like
+  two containers in the same network, talking via Http
+
+
+
+
+--------------------------
+Digging more into zettabyte
+
+
+* Why? Cause this will help me better understand what Sudhir had in mind while giving me the problem
+* Overview on LinkedIn
+   * A global-scale service observability platform for production workloads with native service mesh support and an agentless approach. The primary focus is microservice health monitoring & remediation: finding the exact root cause and location of the error, followed then by automated traffic rerouting. Additionally, the platform provisions for safe delivery of ALL network updates both in configuration and security.
+* Things to ponder over - service mesh, agentless, root cause analysis of the problem and rectification, easy of updates
+* So our problem looks like we want to first detect whether there is a problem in our network and best would be if our solution is agentless. Then comes analysis and then rectification with support of updates
+* One more thing mentioned on site is ZB is trying to make a global scale solution that gives us the idea that it should be lightweight and fault-tolerant
+* What is a service mesh
+   * A service mesh is a way to control how different parts of an application share data with one another. Unlike other systems for managing this communication, a service mesh is a dedicated infrastructure layer built right into an app. 
+   * Interesting…. So we need a service mesh kind of thing and now agentless makes sense cause it is built right into the infra
+   * Why do we need a service mesh? In a microservice architecture, the communication can be built right into the service but this gets complex as the number of services grows. I have read somewhere that each service in future will correspond to an object in OOPs, so a service mesh is more than necessary
+   * Acts as a proxy between services hence are called sidecars
+   * Now it is obvious that these proxies or sidecars should be low latency as we do not want it to interfere much with the communication.
+   * Two ways these proxies are deployed
+      * With each host/node/system. In kubernetes terms can be thought of as daemon set and this will be responsible for routing, managing and observability and logging and what not
+      * Second is with each service as a container within a pod
+   * We will go with the second method.
+
+
+* Now here is the overall picture. We will have two services, one will act as a database and one will act as a client.
+* The sidecar proxy will run with the client that will be responsible for the communication. Its a one way communication. The client will request data from the database. 
+* We also need some kind of dependency management as the client is dependent on the database, so client should come up after the database has. Not present natively in kubernetes
+* To make this modular and extensible, the client will request data from other service via sidecar and sidecar will be reponsible for service lookup. Discoverability and identifiability will be based on labels in kubernetes
+* Sidecar will be responsible for measuring latency and will log the high latency request to its stdout or to a file
+* Another sidecar can be written with these that will pick up the logs from file and send it to a logging system
+
+
+Now moving onto the design doc
