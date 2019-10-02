@@ -4,7 +4,7 @@ import json
 import time
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import parse_qs, urlopen, urlparse.
+from urllib.parse import parse_qs, urlopen, urlparse
 
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
