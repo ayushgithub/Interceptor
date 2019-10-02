@@ -4,3 +4,10 @@
    * Make builds the docker image and put it in a dist folder, with support to check if the image is already present then skip
    * Make clean removes this dist folder
 * We will use a simple python native http webserver that will accept two query parameters, “start_time” & “duration”. The server will return data for the same
+
+
+Client Container
+* Simple python client that will interact with the sidecar proxy.
+* Interaction is over simple http get request with parameters as
+   * service_name - service to forward the request to
+   * Key worded params that will be passed to the service as it is
