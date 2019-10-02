@@ -1,0 +1,6 @@
+﻿Database Container
+* Simple python based application that will generate a time series data for a specified starting time and a given amount
+* Will follow a simple build process
+   * Make builds the docker image and put it in a dist folder, with support to check if the image is already present then skip
+   * Make clean removes this dist folder
+* We will use a simple python native http webserver that will accept two query parameters, “start_time” & “duration”. The server will return data for the same
