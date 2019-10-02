@@ -1,0 +1,5 @@
+DATABASE_SERVER_FOLDER=database_server
+CLIENT_FOLDER=client
+INTERCEPTOR_FOLDER=interceptor
+
+BUILD_SCRIPT=scripts/build.sh
