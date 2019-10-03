@@ -8,6 +8,7 @@ def main():
     proxy_server_port = 8080
     url = "http://localhost:{}/".format(proxy_server_port)
     while True:
+        time.sleep(5)
         try:
             start_time = random.randint(1, 101)
             duration = random.randint(100, 10001)

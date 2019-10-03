@@ -1,1 +1,2 @@
 kubernetes == 9.0.0
+requests
