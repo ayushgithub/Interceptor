@@ -4,6 +4,7 @@
    * Make builds the docker image and put it in a dist folder, with support to check if the image is already present then skip
    * Make clean removes this dist folder
 * We will use a simple python native http webserver that will accept two query parameters, “start_time” & “duration”. The server will return data for the same
+* It will be running on port 9000
 
 
 Client Container
@@ -11,9 +12,11 @@ Client Container
 * Interaction is over simple http get request with parameters as
    * service_name - service to forward the request to
    * Key worded params that will be passed to the service as it is
+* It will be running on port 8080
 
 
 Interceptor
 * This will be a simple http proxy server built using native python http.server
 * As the client interacts with interceptor and hostname of the service is abstracted away from the client, we need python kubernetes client support for finding the respective service for the given service_name which is supposed to a label.
 * It will be responsible for calculating latency and flagging late responses to the stdout
+* It will be running on port - 8000
